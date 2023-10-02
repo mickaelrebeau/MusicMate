@@ -1,29 +1,34 @@
 import { Dispatch, SetStateAction } from "react";
 import { User } from "../pages/profile/ProfilePage";
+import { UseFormRegister } from "react-hook-form";
 
 const musicGenre = ["Rock", "Pop", "Jazz", "Classical", "Blues", "Country", "Metal", "Hip-Hop", "R&B", "Dance/Electro", "Reggae", "Folk", "World", "Dancehall/Zouk", "Afro", "Indie", "K-pop", "Punk", "Soul", "Rap"];
 
 type Props = {
+    register: UseFormRegister<User>,
     user: User, 
     setUser: Dispatch<SetStateAction<User>>
 }
 export function MusicGender({
-    user, setUser
+    register, user, setUser
 }: Props) {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.currentTarget.checked) {
-            setUser({
-                ...user,
-                genres: [...user.genres, e.currentTarget.name]
-            })
-            return;
-        }
-
-        setUser({
-            ...user,
-            genres: user.genres.filter((genre) => genre !== e.currentTarget.name)
-        })
+        const { name, checked } = e.currentTarget;
+        setUser((prevUser) => {
+            if (checked) {
+              return {
+                ...prevUser,
+                genres: [...prevUser.genres, name],
+              }; 
+            } else {
+              return {
+                ...prevUser,
+                genres: prevUser.genres.filter((genre) => genre !== name),
+              };
+            }
+        });
+        console.log(user.genres);
     }
 
     return (
@@ -33,7 +38,14 @@ export function MusicGender({
             <div className="mt-8 max-w-[1220px] grid grid-cols-4 gap-4">
                 {musicGenre.map((genre) => (
                     <div key={genre} className="flex items-center gap-1">
-                        <input type="checkbox" id={genre} name={genre} checked={user.genres.includes(genre)} onChange={handleChange} />
+                        <input
+                            {...register("genres")}
+                            type="checkbox"
+                            id={genre}
+                            name={genre}
+                            checked={user.genres.includes(genre)}
+                            onChange={handleChange}
+                        />
                         <label htmlFor={genre}>{genre}</label>
                     </div>
                 ))}
