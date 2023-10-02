@@ -27,7 +27,7 @@ export function Profile() {
         genres: []
     })
 
-    const steps = [<SignUp {...{register, user, setUser}}/>, <MusicGender {...{user, setUser}} />];
+    const steps = [<SignUp {...{register, user, setUser}}/>, <MusicGender {...{register, user, setUser}} />];
     const [currentStep, setCurrentStep] = useState(0);
     const isFinished = currentStep === steps.length - 1;
     const animationRef = useRef<HTMLDivElement>(null);
