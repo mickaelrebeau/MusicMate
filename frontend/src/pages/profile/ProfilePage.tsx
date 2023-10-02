@@ -4,16 +4,19 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { MoveLeft } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import * as z from "zod";  
 
-export type User = {
-    pseudo: string,
-    email: string,
-    genres: string[]
-}
+const schema = z.object({
+  pseudo: z.string(),
+  email: z.string().email(),
+  genres: z.array(z.string()) 
+})  
+
+export type User = z.infer<typeof schema>;
 
 export function Profile() {
 
-    const {register, handleSubmit} = useForm<User>();
+    const { register, handleSubmit } = useForm<User>();
 
     const [user, setUser] = useState<User>({
         pseudo: "",
