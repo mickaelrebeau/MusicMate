@@ -19,12 +19,12 @@ export function MusicGender({
             if (checked) {
               return {
                 ...prevUser,
-                genres: [...prevUser.genres, name],
+                genres: [...(prevUser.genres || []), name],
               }; 
             } else {
               return {
                 ...prevUser,
-                genres: prevUser.genres.filter((genre) => genre !== name),
+                genres: (prevUser.genres || []).filter((genre) => genre !== name),
               };
             }
         });
@@ -43,7 +43,7 @@ export function MusicGender({
                             type="checkbox"
                             id={genre}
                             name={genre}
-                            checked={user.genres.includes(genre)}
+                            value={genre}
                             onChange={handleChange}
                         />
                         <label htmlFor={genre}>{genre}</label>
