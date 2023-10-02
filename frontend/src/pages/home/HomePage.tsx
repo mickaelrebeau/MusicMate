@@ -10,7 +10,7 @@ export function Home() {
 
     return (
         <>
-            <section className="h-full flex flex-col items-center justify-center animate-fadeIn">
+            <section className="h-full flex flex-col items-center justify-center text-center animate-fadeIn">
                 <p className="text-8xl">
                     👋 
                     <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-400">Welcome </span>
