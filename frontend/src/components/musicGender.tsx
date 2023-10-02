@@ -39,7 +39,7 @@ export function MusicGender({
                 {musicGenre.map((genre) => (
                     <div key={genre} className="flex items-center gap-1">
                         <input
-                            {...register("genres")}
+                            {...register("genres", {onChange: handleChange})}
                             type="checkbox"
                             id={genre}
                             name={genre}
