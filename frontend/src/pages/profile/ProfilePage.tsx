@@ -4,22 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { MoveLeft } from "lucide-react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import zod from "zod";
 
-const schema = zod.object({
-    pseudo: zod.string(),
-    email: zod.string().email(),
-    genres: zod.array(zod.string())
-})
-
-export type User = zod.infer<typeof schema>;
+export type User = {
+    pseudo: string,
+    email: string,
+    genres: string[]
+}
 
 export function Profile() {
 
-    const {register, handleSubmit} = useForm<User>({
-        resolver: zodResolver(schema),
-    });
+    const {register, handleSubmit} = useForm<User>();
 
     const [user, setUser] = useState<User>({
         pseudo: "",
@@ -42,13 +36,9 @@ export function Profile() {
 
     const onSubmit: SubmitHandler<User> = (data, e) => {
         e?.preventDefault();
-        console.log(data);
+        console.log("Data", data);
+        console.log("User", user);
     }
-
-    // const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
-    //     e.preventDefault();
-    //     console.log("hello");
-    // }
 
     useEffect(() => {
         animationRef.current?.classList.add('animate');
