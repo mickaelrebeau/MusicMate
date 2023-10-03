@@ -1,9 +1,10 @@
-import { Route, Routes } from "react-router-dom";
 import './App.css';
+import { Route, Routes } from "react-router-dom";
 import { Auth } from "./pages/auth/AuthPage";
 import { SignUp } from "./pages/signup/SignUpPage";
 import { Login } from "./pages/login/LoginPage";
 import { Home } from "./pages/home/HomePage";
+import { Sidebar } from "./components/sidebar";
 
 function App() {
 
@@ -13,8 +14,14 @@ function App() {
         <Route path="/" element={<Auth />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home />} />
       </Routes>
+        
+      <div className="flex">
+        <Sidebar />
+        <Routes>
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </div>
     </>
   )
 }
