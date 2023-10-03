@@ -1,34 +1,38 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Dispatch, SetStateAction } from "react";
-import { User } from "../pages/profile/ProfilePage";
+import { User } from "../pages/signup/SignUpPage";
 import { UseFormRegister } from "react-hook-form";
 
 const musicGenre = ["Rock", "Pop", "Jazz", "Classical", "Blues", "Country", "Metal", "Hip-Hop", "R&B", "Dance/Electro", "Reggae", "Folk", "World", "Dancehall/Zouk", "Afro", "Indie", "K-pop", "Punk", "Soul", "Rap"];
 
 type Props = {
     register: UseFormRegister<User>,
-    user: User, 
-    setUser: Dispatch<SetStateAction<User>>
+    user: User
+    setUser: Dispatch<SetStateAction<User>>,
+    errors: any
 }
 export function MusicGender({
-    register, user, setUser
+    register,
+    user,
+    setUser,
+    errors
 }: Props) {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, checked } = e.currentTarget;
+        const { value, checked } = e.currentTarget;
         setUser((prevUser) => {
             if (checked) {
               return {
                 ...prevUser,
-                genres: [...(prevUser.genres || []), name],
+                genres: [...prevUser.genres, value],
               }; 
             } else {
               return {
                 ...prevUser,
-                genres: (prevUser.genres || []).filter((genre) => genre !== name),
+                genres: prevUser.genres.filter((genre) => genre !== value),
               };
             }
         });
-        console.log(user.genres);
     }
 
     return (
@@ -37,16 +41,19 @@ export function MusicGender({
 
             <div className="mt-8 max-w-[1220px] grid grid-cols-4 gap-4">
                 {musicGenre.map((genre) => (
-                    <div key={genre} className="flex items-center gap-1">
+                    <div key={genre} className="w-[200px] h-[50px] flex justify-center items-center gap-1">
+                        {errors.genres?.message}
                         <input
-                            {...register("genres", {onChange: handleChange})}
+                            {...register("genres")}
                             type="checkbox"
                             id={genre}
-                            name={genre}
                             value={genre}
                             onChange={handleChange}
+                            className="hidden"
                         />
-                        <label htmlFor={genre}>{genre}</label>
+                        <label htmlFor={genre} className={`w-[200px] text-center font-semibold cursor-pointer py-1 rounded ${user.genres.includes(genre) ? 'text-white bg-purple-900' : 'text-slate-400'}`}>
+                            {genre}
+                        </label>
                     </div>
                 ))}
             </div>
