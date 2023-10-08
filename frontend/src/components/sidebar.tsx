@@ -14,7 +14,7 @@ export function Sidebar() {
   return (
     <>
       <div className="flex flex-col px-3 py-6 shadow w-72 border-r border-gray-700">
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 sticky top-0">
           <div className="flex flex-col gap-4">
             <h2 className="text-xl font-bold">Discover</h2>
             <MenuItem link="/home" icon={PlayCircle} text="Listen Now" />
@@ -29,7 +29,7 @@ export function Sidebar() {
           </div>
           <div className="flex flex-col gap-4">
             <h2 className="text-xl font-bold">Playlists</h2>
-            <div className="h-[150px] 2xl:h-full overflow-auto">
+            <div className="h-[150px]  overflow-y-scroll">
               <MenuItem
                 link="/playlists/recently-added"
                 icon={ListMusic}
