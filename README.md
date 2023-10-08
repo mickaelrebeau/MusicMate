@@ -4,14 +4,14 @@
 
 ## What is MusicMate ?
 
-MusicMate is an application for music recommendation. It aims to make it easier for users to discover new music from all over the world. The application is developed by Mike_DreeMan, a passionate and creative developer with expertise in JavaScript (React, NestJs) and a deep understanding of programming languages such as Python.
+MusicMate is an application for music recommendation. It aims to make it easier for users to discover new music from all over the world. The application is developed by Mike_Dreeman, a passionate and creative developer with expertise in JavaScript (React, NestJs) and a deep understanding of programming languages such as Python.
 
 ## Development Team
 
-| <img src="/src/assets/logo-mike.png" width="50" /> | Mike_DreeMan |
+| <img src="https://github.com/mickaelrebeau/MusicMate/assets/75978618/58703266-e28a-4e74-b104-341801a6d033" width="50"/> | Mike_DreeMan |
 |:---:|:---:|
 
-The development team of MusicMate consists of Mike_DreeMan, who is responsible for the development of the application. Mike_DreeMan has less than 2 years of experience and specializes in web development. He has worked on various projects, including the creation of a mobile application using React and Capacitor.
+The development team of MusicMate consists of Mike_Dreeman, who is responsible for the development of the application. Mike_DreeMan has less than 2 years of experience and specializes in web development. He has worked on various projects, including the creation of a mobile application using React and Capacitor.
 
 ## Technologies Used
 
