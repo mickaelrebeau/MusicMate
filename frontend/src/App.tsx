@@ -7,6 +7,7 @@ import { Home } from './pages/home/HomePage';
 import { Sidebar } from './components/sidebar';
 import { SearchPage } from './pages/home/SearchPage';
 import { Playlists } from './pages/playlists/Playlists';
+import { ArtistsPage } from './pages/home/ArtistsPage';
 
 function App() {
    return (
@@ -21,7 +22,7 @@ function App() {
          <Route path="home" element={<Home />} />
          <Route path="songs" element={<>Songs</>} />
          <Route path="search" element={<SearchPage />} />
-         <Route path="artists" element={<>Artist</>} />
+         <Route path="artists" element={<ArtistsPage />} />
          <Route path="albums" element={<>Albums</>} />
 
          {/* Playlists pages */}
