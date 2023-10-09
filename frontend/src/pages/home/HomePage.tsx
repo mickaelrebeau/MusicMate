@@ -3,8 +3,6 @@ import { ListPlus, Shuffle } from 'lucide-react';
 import { useEffect } from 'react';
 
 export function Home() {
-  const clientID = process.env.CLIENT_ID;
-  const clientSecret = process.env.CLIENT_SECRET;
   const playlistsNumber = 5;
   const url =
     'https://upload.wikimedia.org/wikipedia/en/1/11/Dive_tycho_album.jpg';
@@ -15,14 +13,16 @@ export function Home() {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: `grant_type=client_credentials&client_id=${clientID}&client_secret=${clientSecret}`,
+      body: `grant_type=client_credentials&client_id=${
+        import.meta.env.CLIENT_ID
+      }&client_secret=${import.meta.env.CLIENT_SECRET}`,
     };
     fetch('https://accounts.spotify.com/api/token', authParams)
       .then((response) => response.json())
       .then((data) => {
         localStorage.setItem('token', data.access_token);
       });
-  }, [clientID, clientSecret]);
+  }, []);
 
   return (
     <section className="p-10 mx-auto h-screen flex flex-col gap-10">
