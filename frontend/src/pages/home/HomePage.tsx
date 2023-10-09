@@ -1,4 +1,5 @@
 import { DailyMixCard } from '@/src/components/dailyMixCard';
+import { CLIENT_ID, CLIENT_SECRET } from '@/src/utils/spotify';
 import { ListPlus, Shuffle } from 'lucide-react';
 import { useEffect } from 'react';
 
@@ -13,9 +14,7 @@ export function Home() {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: `grant_type=client_credentials&client_id=${
-        import.meta.env.CLIENT_ID
-      }&client_secret=${import.meta.env.CLIENT_SECRET}`,
+      body: `grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`,
     };
     fetch('https://accounts.spotify.com/api/token', authParams)
       .then((response) => response.json())
