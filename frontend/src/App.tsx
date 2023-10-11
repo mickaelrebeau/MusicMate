@@ -6,8 +6,9 @@ import { Login } from './pages/auth/LoginPage';
 import { Home } from './pages/home/HomePage';
 import { Sidebar } from './components/sidebar';
 import { SearchPage } from './pages/home/SearchPage';
-import { Playlists } from './pages/playlists/Playlists';
 import { ArtistsPage } from './pages/home/ArtistsPage';
+import { Header } from './components/header';
+import { SongsPage } from './pages/home/SongsPage';
 
 function App() {
    return (
@@ -20,30 +21,9 @@ function App() {
 
          {/* Website pages */}
          <Route path="home" element={<Home />} />
-         <Route path="songs" element={<>Songs</>} />
+         <Route path="songs" element={<SongsPage />} />
          <Route path="search" element={<SearchPage />} />
          <Route path="artists" element={<ArtistsPage />} />
-         <Route path="albums" element={<>Albums</>} />
-
-         {/* Playlists pages */}
-         <Route path="/playlists">
-           <Route index element={<Playlists />} />
-           <Route
-             path="recently-added"
-             element={<>Playlists recently added</>}
-           />
-           <Route
-             path="recently-played"
-             element={<>Playlists recently played</>}
-           />
-
-           {/* loader pour récuperer les datas des playlits */}
-           <Route
-             path=":slug"
-             element={<>My playlist 1</>}
-             loader={() => ['hello', 'world']}
-           />
-         </Route>
        </Route>
      </Routes>
    );
@@ -57,10 +37,15 @@ function Layout() {
    if (isAuthPage) return <Outlet />;
 
    return (
-      <div className="flex">
+     <>
+       <Header />
+       <div className="flex h-full">
          <Sidebar />
-         <Outlet />
-      </div>
+         <div className="overflow-y-scroll w-full">
+           <Outlet />
+         </div>
+       </div>
+     </>
    );
 }
 
