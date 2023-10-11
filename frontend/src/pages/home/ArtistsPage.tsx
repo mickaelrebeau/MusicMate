@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { ArtistsCard } from '@/src/components/ArtistsCard';
 import { Search } from 'lucide-react';
 import { useState } from 'react';
@@ -11,8 +12,10 @@ export function ArtistsPage() {
       images: { url: string }[];
       name: string;
       artists: { name: string }[];
+      total_tracks: number;
+      external_urls: [];
     }[]
-    >([]);
+  >([]);
   
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -45,17 +48,24 @@ export function ArtistsPage() {
       });
 
     await fetch(
-      `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album&market=FR`,
+      `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album&market=US`,
       searchParams
     )
       .then((response) => response.json())
       .then((data) => {
+        console.log(data.items);
         setAlbums(data.items);
       });
   }
 
   return (
-    <section className="p-10 mx-auto h-full flex flex-col gap-10">
+    <section className="p-10 mx-auto flex flex-col gap-10">
+      <p className="text-center text-xl text-slate-400">
+        <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-400">
+          Search{' '}
+        </span>
+        an artist name and find their albums.
+      </p>
       <div className="flex items-stretch justify-center">
         <form onSubmit={onSubmit} className="flex gap-3">
           <input
@@ -81,6 +91,9 @@ export function ArtistsPage() {
             url={album.images[0].url}
             albumName={album.name}
             artistName={album.artists[0].name}
+            totalTracks={album.total_tracks}
+            // @ts-ignore
+            href={album.external_urls["spotify"]}
           />
         ))}
       </div>
