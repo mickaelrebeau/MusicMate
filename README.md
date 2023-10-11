@@ -20,10 +20,12 @@ MusicMate utilizes a combination of frontend and backend technologies to provide
 ### Frontend Technologies
 
 - TailwindCSS: A utility-first CSS framework that provides a set of pre-built UI components and utilities to help build responsive and modern user interfaces.
-React: A popular JavaScript library for building user interfaces. React allows developers to create reusable UI components and efficiently manage the state of the application.
+
+- React: A popular JavaScript library for building user interfaces. React allows developers to create reusable UI components and efficiently manage the state of the application.
 
 - TypeScript: A typed superset of JavaScript that adds static typing to the language. TypeScript helps catch errors early during development and improves code maintainability.
-Vite: A fast build tool for modern web applications. Vite provides a zero-config development server and optimized production builds, making the development process more efficient.
+
+- Vite: A fast build tool for modern web applications. Vite provides a zero-config development server and optimized production builds, making the development process more efficient.
 
 ### Backend Technologies
 
