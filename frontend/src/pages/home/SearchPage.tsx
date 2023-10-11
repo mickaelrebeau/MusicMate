@@ -17,9 +17,18 @@ export function SearchPage() {
 
   return (
     <section className="px-6 py-10 mx-auto flex flex-col gap-10">
+      <p className="text-center text-xl text-slate-400">
+        <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-400">
+          Search{' '}
+        </span>
+        for your favorite song categrory.
+      </p>
       <div className="flex items-stretch justify-center">
         <div className="relative">
-          <Search className="absolute left-2 top-1/2 -translate-y-1/2" size={30} />
+          <Search
+            className="absolute left-2 top-1/2 -translate-y-1/2"
+            size={30}
+          />
           <input
             type="search"
             className="relative m-0 p-3 pl-11 block w-[400px] rounded-xl border-2 border-solid border-neutral-300 bg-transparent bg-clip-padding text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:border-2 focus:border-purple-500 focus:outline dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-slate-5400 dark:focus:border-primary"
