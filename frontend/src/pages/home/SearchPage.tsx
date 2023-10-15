@@ -3,6 +3,7 @@ import { PlayCircle, Search } from 'lucide-react';
 import { useState } from 'react';
 
 export function SearchPage() {
+  const token = localStorage.getItem('token');
   const [search, setSearch] = useState('');
   const url =
     'https://upload.wikimedia.org/wikipedia/en/1/11/Dive_tycho_album.jpg';
@@ -14,6 +15,25 @@ export function SearchPage() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
+
+  const handleClick = async (genre: string) => {
+    const searchParams = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    await fetch(
+      `https://api.spotify.com/v1/search?q=genre%3A${genre}&type=track&limit=1`,
+      searchParams
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.tracks.items);
+      });
+  }
 
   return (
     <section className="px-6 py-10 mx-auto flex flex-col gap-10">
@@ -52,7 +72,7 @@ export function SearchPage() {
             />
             <div className="absolute w-64 h-64 2xl:w-72 2xl:h-72 flex flex-col items-center justify-center gap-2 text-center bg-black bg-opacity-60 hover:bg-opacity-0 hover:bg-transparent cursor-pointer">
               <h2 className="text-2xl font-bold">{category}</h2>
-              <button className="flex items-center justify-center gap-2 p-2 font-semibold cursor-pointer hover:text-purple-700 rounded">
+              <button onClick={() =>handleClick(category.toLowerCase())} className="flex items-center justify-center gap-2 p-2 font-semibold cursor-pointer hover:text-purple-700 rounded">
                 <PlayCircle size={50} />
               </button>
             </div>
