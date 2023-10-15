@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import { ArtistsCard } from '@/src/components/ArtistsCard';
+import { ArtistsCard } from '@/src/components/cards/ArtistsCard';
 import { Search } from 'lucide-react';
 import { useState } from 'react';
 
@@ -13,7 +12,7 @@ export function ArtistsPage() {
       name: string;
       artists: { name: string }[];
       total_tracks: number;
-      external_urls: [];
+      external_urls: { spotify: string };
     }[]
   >([]);
   
@@ -92,8 +91,7 @@ export function ArtistsPage() {
             albumName={album.name}
             artistName={album.artists[0].name}
             totalTracks={album.total_tracks}
-            // @ts-ignore
-            href={album.external_urls["spotify"]}
+            href={album.external_urls.spotify}
           />
         ))}
       </div>
