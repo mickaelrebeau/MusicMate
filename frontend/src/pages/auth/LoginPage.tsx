@@ -47,6 +47,7 @@ export function Login() {
       // const response = await api.post("auth/signin", login)
 
       // if (response.status === 201) {
+      //     localStorage.setItem('userId', response.data.id);
       //     navigate("/home");
       // }
    };
