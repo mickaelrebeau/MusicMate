@@ -17,7 +17,6 @@ export function SongsPage() {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Search for', search);
     if (search) {
       searchSong();
     }
@@ -42,7 +41,6 @@ export function SongsPage() {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.tracks.items);
         return data.tracks.items;
       });
 
@@ -57,7 +55,6 @@ export function SongsPage() {
         });
     });
   }
-  console.log(songs);
 
   return (
     <section className="px-6 py-10 mx-auto flex flex-col gap-10">

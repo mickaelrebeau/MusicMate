@@ -18,7 +18,6 @@ export function ArtistsPage() {
   
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Search for', search);
     if (search) {
       searchArtist();
     }
@@ -52,7 +51,6 @@ export function ArtistsPage() {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.items);
         setAlbums(data.items);
       });
   }
