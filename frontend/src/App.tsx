@@ -9,24 +9,28 @@ import { SearchPage } from './pages/home/SearchPage';
 import { ArtistsPage } from './pages/home/ArtistsPage';
 import { Header } from './components/header';
 import { SongsPage } from './pages/home/SongsPage';
+import { Profil } from './pages/profil/ProfilPage';
+import { EditProfil } from './pages/profil/EditProfilPage';
 
 function App() {
-   return (
-     <Routes>
-       <Route path="/" element={<Layout />}>
-         {/* Auth pages */}
-         <Route index element={<Hero />} />
-         <Route path="signup" element={<SignUp />} />
-         <Route path="login" element={<Login />} />
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        {/* Auth pages */}
+        <Route index element={<Hero />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="login" element={<Login />} />
 
-         {/* Website pages */}
-         <Route path="home" element={<Home />} />
-         <Route path="songs" element={<SongsPage />} />
-         <Route path="search" element={<SearchPage />} />
-         <Route path="artists" element={<ArtistsPage />} />
-       </Route>
-     </Routes>
-   );
+        {/* Website pages */}
+        <Route path="home" element={<Home />} />
+        <Route path="songs" element={<SongsPage />} />
+        <Route path="search" element={<SearchPage />} />
+        <Route path="artists" element={<ArtistsPage />} />
+        <Route path="profil" element={<Profil />} />
+        <Route path="profil/edit" element={<EditProfil />} />
+      </Route>
+    </Routes>
+  );
 }
 
 function Layout() {
@@ -38,11 +42,13 @@ function Layout() {
 
    return (
      <>
-       <Header />
-       <div className="flex h-full">
-         <Sidebar />
-         <div className="overflow-y-scroll w-full">
-           <Outlet />
+       <div className="h-screen">
+         <Header />
+         <div className="flex h-full">
+           <Sidebar />
+           <div className="overflow-y-scroll w-full">
+             <Outlet />
+           </div>
          </div>
        </div>
      </>
