@@ -12,7 +12,7 @@ export function ArtistsCard({
   href: string;
 }) {
   return (
-    <div className="max-w-[240px] p-4 flex flex-col items-center gap-2 border rounded-lg">
+    <div className="max-w-[240px] p-4 flex flex-col items-center gap-2 border border-slate-600 shadow-xl shadow-purple-500/20 rounded-lg">
       <img
         className="w-[200px] h-[200px] object-cover rounded-lg"
         src={url}
