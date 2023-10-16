@@ -1,5 +1,5 @@
 import './App.css';
-import { Outlet, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom';
 import { Hero } from './pages/auth/HeroPage';
 import { SignUp } from './pages/auth/SignUpPage';
 import { Login } from './pages/auth/LoginPage';
@@ -34,25 +34,29 @@ function App() {
 }
 
 function Layout() {
-   const { pathname } = useLocation();
-   const authPages = ['/', '/signup', '/login'];
-   const isAuthPage = authPages.includes(pathname);
+  const { pathname } = useLocation();
+  const authPages = ['/', '/signup', '/login'];
+  const isAuthPage = authPages.includes(pathname);
+  const access_token = localStorage.getItem('access_token');
+  const auth = { access_token: access_token };
 
-   if (isAuthPage) return <Outlet />;
+  if (isAuthPage) return <Outlet />;
 
-   return (
-     <>
-       <div className="h-screen">
-         <Header />
-         <div className="flex h-full">
-           <Sidebar />
-           <div className="overflow-y-scroll w-full">
-             <Outlet />
-           </div>
-         </div>
-       </div>
-     </>
-   );
+  return auth.access_token ? (
+    <>
+      <div className="h-screen">
+        <Header />
+        <div className="flex h-full">
+          <Sidebar />
+          <div className="overflow-y-scroll w-full">
+            <Outlet />
+          </div>
+        </div>
+      </div>
+    </>
+  ) : (
+    <Navigate to="/" />
+  );
 }
 
 export default App;
