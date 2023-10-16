@@ -1,12 +1,12 @@
 import { FormSignUp } from '@/src/components/forms/formSignup';
 import { MusicGender } from '@/src/components/forms/musicGender';
 import { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { MoveLeft } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-// import { api } from "@/src/libs/axios";
+import { api } from "@/src/libs/axios";
 
 const schema = z.object({
   pseudo: z
@@ -43,7 +43,7 @@ const defaultconfig = {
 };
 
 export function SignUp() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -83,11 +83,11 @@ export function SignUp() {
     console.log('Data', data);
     console.log('User', user);
 
-    // const response = await api.post("auth/signup", user)
+    const response = await api.post("auth/signup", user)
 
-    // if (response.status === 201) {
-    //     navigate("/login");
-    // }
+    if (response.status === 201) {
+        navigate("/login");
+    }
   };
 
   useEffect(() => {
