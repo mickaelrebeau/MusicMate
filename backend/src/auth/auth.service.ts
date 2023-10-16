@@ -3,11 +3,13 @@ import { UserService } from 'src/user/user.service';
 import { SignUpDto } from './dtos/signUp.dto';
 import * as argon2 from 'argon2';
 import { SignInDto } from './dtos/signIn.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
     constructor(
         private readonly userService: UserService,
+        private jwtService: JwtService
     ) { }
     
     async signUp(signUpDto: SignUpDto) {
@@ -32,21 +34,21 @@ export class AuthService {
     }
 
     async signIn(body: SignInDto) {
-        try {
-            const user = await this.userService.getByEmail(body.email);
-            const passwordMatches = await argon2.verify(
-                user.password,
-                body.password,
-            );
+        const user = await this.userService.getByEmail(body.email);
+        const passwordMatches = await argon2.verify(
+            user.password,
+            body.password,
+        );
 
-            if (user.email !== body.email ||!passwordMatches) {
-                throw new UnauthorizedException();
-            }
-
-            return user
-        } catch (error) {
-            throw new NotFoundException(error);
+        if (user.email !== body.email || !passwordMatches) {
+            throw new UnauthorizedException();
         }
+
+        const payload = { sub: user.id, username: user.pseudo };
+        return {
+            access_token: await this.jwtService.signAsync(payload),
+            userId: user.id
+        };
     }
 
     hashData(data: string) {
