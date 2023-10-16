@@ -1,8 +1,15 @@
 import { LogOut, UserCircle } from 'lucide-react';
 import { cn } from '../libs/tailwind';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export function Header() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('userId');
+    navigate('/');
+  }
   return (
     <header className="flex items-center justify-between px-6 py-4 border-b border-slate-600">
       <NavLink
@@ -28,12 +35,12 @@ export function Header() {
           Profil
           <UserCircle size={20} />
         </NavLink>
-        <NavLink
-          to="/"
+        <button
+          onClick={handleClick}
           className="flex items-center gap-2 p-3 border border-slate-600 rounded hover:text-purple-400 hover:border-purple-400">
           Log Out
           <LogOut size={20} />
-        </NavLink>
+        </button>
       </div>
     </header>
   );
