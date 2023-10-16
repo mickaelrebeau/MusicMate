@@ -10,7 +10,7 @@ export function SongsCard({
   href: string;
 }) {
   return (
-    <div className="w-[900px] p-4 flex items-end justify-between gap-2 border border-slate-600 rounded-lg">
+    <div className="w-[900px] p-4 flex items-end justify-between gap-2 border border-slate-600 rounded-lg shadow-xl shadow-purple-500/20">
       <div className="flex items-center gap-3">
         <img
           className="w-[100px] h-[100px] object-cover rounded-lg"
