@@ -77,7 +77,7 @@ export function SongsPage() {
           />
           <button
             type="submit"
-            className="px-3 border-2 rounded-lg dark:border-neutral-600">
+            className="px-3 border-2 rounded-lg dark:border-neutral-600 hover:text-purple-500 hover:border-purple-500">
             <Search size={30} />
           </button>
         </form>
