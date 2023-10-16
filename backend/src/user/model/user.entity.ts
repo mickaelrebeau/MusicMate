@@ -12,7 +12,7 @@ export class User {
   pseudo: string;
 
   @ApiProperty({ example: 'miketest', description: 'User password' })
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @ApiProperty({ example: 'mike@admin.fr', description: 'User email' })
