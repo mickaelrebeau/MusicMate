@@ -33,7 +33,9 @@ export function FormSignUp({ register, user, setUser, errors }: Props) {
           )}
           <input
             {...register('pseudo')}
-            className="rounded p-2"
+            className={`border rounded p-2 ${
+              errors.pseudo ? 'border-red-500 text-red-500' : 'border-slate-500'
+            }`}
             id="pseudo"
             type="text"
             name="pseudo"
@@ -54,7 +56,9 @@ export function FormSignUp({ register, user, setUser, errors }: Props) {
           )}
           <input
             {...register('email')}
-            className="rounded p-2"
+            className={`border rounded p-2 ${
+              errors.email ? 'border-red-500 text-red-500' : 'border-slate-500'
+            }`}
             id="email"
             type="email"
             name="email"
@@ -75,7 +79,11 @@ export function FormSignUp({ register, user, setUser, errors }: Props) {
           )}
           <input
             {...register('password')}
-            className="rounded p-2"
+            className={`border rounded p-2 ${
+              errors.password
+                ? 'border-red-500 text-red-500'
+                : 'border-slate-500'
+            }`}
             id="password"
             type="password"
             name="password"

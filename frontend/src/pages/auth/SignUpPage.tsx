@@ -12,12 +12,24 @@ const schema = z.object({
   pseudo: z
     .string()
     .min(3, { message: 'Must be 3 or more characters long' })
-    .max(20, { message: 'Must be 20 or fewer characters long' }),
+    .max(20, { message: 'Must be 20 or fewer characters long' })
+    .refine((value) => /^[a-zA-Z0-9]+$/.test(value), {
+      message: 'Pseudo can only contain letters and numbers',
+    }),
   email: z.string().email({ message: 'Invalid email address' }),
   password: z
     .string()
     .min(8, { message: 'Must be 8 or more characters long' })
-    .max(20, { message: 'Must be 20 or fewer characters long' }),
+    .refine((value) => /[A-Z]/.test(value), {
+      message: 'Password must contain at least one uppercase letter',
+    })
+    .refine((value) => /[0-9]/.test(value), {
+      message: 'Password must contain at least one digit',
+    })
+    .refine((value) => /[!@#$%^&*]/.test(value), {
+      message:
+        'Password must contain at least one special character (!@#$%^&*)',
+    }),
   genres: z.array(z.string()),
 });
 
