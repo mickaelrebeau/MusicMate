@@ -1,6 +1,6 @@
 import { SongsCard } from '@/src/components/cards/SongsCard';
 import { DailyMixCard } from '@/src/components/cards/dailyMixCard';
-import { musicGenre } from '@/src/utils/genres';
+import { authorizationProfil } from '@/src/services/user';
 import { CLIENT_ID, CLIENT_SECRET } from '@/src/utils/spotify';
 import { ListPlus, Shuffle } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -21,6 +21,18 @@ export function Home() {
     >([]);
   
   const [randomSongIndex, setRandomSongIndex] = useState(0);
+
+  const [user, setUser] = useState<{ genres: string[] }>({
+    genres: [],
+  });
+
+  useEffect(() => {
+    authorizationProfil().then((response) => {
+      setUser({
+        genres: response.genres,
+      });
+    });
+  }, []);
 
   useEffect(() => {
     const authParams = {
@@ -52,7 +64,7 @@ export function Home() {
     };
 
     const randomGenre =
-      musicGenre[Math.floor(Math.random() * musicGenre.length)].toLowerCase();
+      user.genres[Math.floor(Math.random() * user.genres.length)].toLowerCase();
 
     await fetch(
       `https://api.spotify.com/v1/search?q=genre%3A${randomGenre}&type=track&limit=50`,
