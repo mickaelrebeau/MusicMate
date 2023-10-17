@@ -72,7 +72,9 @@ export function SearchPage() {
             />
             <div className="absolute w-64 h-64 2xl:w-72 2xl:h-72 flex flex-col items-center justify-center gap-2 text-center bg-black bg-opacity-60 hover:bg-opacity-0 hover:bg-transparent cursor-pointer">
               <h2 className="text-2xl font-bold">{category}</h2>
-              <button onClick={() =>handleClick(category.toLowerCase())} className="flex items-center justify-center gap-2 p-2 font-semibold cursor-pointer hover:text-purple-700 rounded">
+              <button
+                onClick={() => handleClick(category.toLowerCase())}
+                className="flex items-center justify-center gap-2 p-2 font-semibold cursor-pointer hover:text-purple-700 rounded">
                 <PlayCircle size={50} />
               </button>
             </div>
