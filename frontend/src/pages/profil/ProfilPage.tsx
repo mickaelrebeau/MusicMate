@@ -21,7 +21,7 @@ export function Profil() {
   }, [])
 
   return (
-    <section className="px-10 pt-10 pb-20 mx-auto flex flex-col items-center justify-center gap-10">
+    <section className="px-10 py-10 mx-auto flex flex-col items-center justify-center gap-10">
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl text-center font-bold">Profil</h2>
         <p className="py-2 px-10 border border-slate-600 rounded shadow shadow-purple-500/30">
@@ -45,7 +45,7 @@ export function Profil() {
       </div>
       <NavLink
         to="/profil/edit"
-        className="w-96 flex items-center justify-center gap-2 mt-5 p-2 font-semibold cursor-pointer hover:bg-purple-900 rounded hover:shadow hover:shadow-purple-500/30">
+        className="w-96 flex items-center justify-center gap-2 mt-5 p-2 font-semibold cursor-pointer hover:bg-gradient-to-r from-indigo-600 to-purple-400 rounded">
         Edit
       </NavLink>
     </section>
