@@ -8,6 +8,7 @@ export function Header() {
   const handleClick = () => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('userId');
+    localStorage.removeItem('token');
     navigate('/');
   }
   return (
