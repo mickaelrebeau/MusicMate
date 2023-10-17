@@ -48,15 +48,12 @@ export function Login() {
     password: '',
   });
 
-  const onSubmit: SubmitHandler<UserLogin> = async (data, e) => {
+  const onSubmit: SubmitHandler<UserLogin> = async (_data, e) => {
     e?.preventDefault();
-    console.log('Data', data);
-    console.log('User', login);
 
     const response = await api.post('auth/signin', login);
 
     if (response.status === 201) {
-      console.log(response.data);
       localStorage.setItem('access_token', response.data.datas.access_token);
       localStorage.setItem('userId', response.data.datas.userId);
       navigate("/home");

@@ -78,10 +78,8 @@ export function SignUp() {
     setCurrentStep((prevStep) => prevStep - 1);
   };
 
-  const onSubmit: SubmitHandler<User> = async (data, e) => {
+  const onSubmit: SubmitHandler<User> = async (_data, e) => {
     e?.preventDefault();
-    console.log('Data', data);
-    console.log('User', user);
 
     const response = await api.post("auth/signup", user)
 
