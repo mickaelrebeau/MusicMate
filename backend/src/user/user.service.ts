@@ -1,8 +1,9 @@
+import { User } from './model/user.entity';
+import { UserWithoutPassword } from './model/user';
+import { SignUpDto } from 'src/auth/dtos/signUp.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './model/user.entity';
-import { SignUpDto } from 'src/auth/dtos/signUp.dto';
 
 @Injectable()
 export class UserService {
@@ -10,32 +11,63 @@ export class UserService {
         @InjectRepository(User)
         private userRepository: Repository<User>,
     ) { }
-    
-    getAll(): Promise<User[]> {
-        return this.userRepository.find();
+
+    async getAll(): Promise<UserWithoutPassword[]> {
+        const users = await this.userRepository.find();
+        const usersWithoutPasswords = users.map(user => {
+            const { password, ...userWithoutPassword } = user;
+            return userWithoutPassword;
+        });
+        return usersWithoutPasswords;
     }
 
-    getById(id: string): Promise<User | null> {
-        return this.userRepository.findOneBy({id});
+    async getById(id: string): Promise<UserWithoutPassword | null> {
+        const user = await this.userRepository.findOneBy({id});
+        if (user) {
+            const { password, ...userWithoutPassword } = user;
+            return userWithoutPassword;
+        }
+        return null;
     }
 
-    create(user: SignUpDto): Promise<User> {
-        return this.userRepository.save(user);
+    async create(user: SignUpDto): Promise<UserWithoutPassword> {
+        const newUser = this.userRepository.create(user);
+        const savedUser = await this.userRepository.save(newUser);
+        const { password, ...userWithoutPassword } = savedUser;
+        return userWithoutPassword;
     }
 
-    update(id: string, user: User): Promise<any> {
-        return this.userRepository.update(id, user);
+    async update(id: string, user: SignUpDto): Promise<UserWithoutPassword | null> {
+        const existingUser = await this.userRepository.findOneBy({id});
+        if (!existingUser) {
+            return null;
+        }
+        
+        this.userRepository.merge(existingUser, user);
+        const updatedUser = await this.userRepository.save(existingUser);
+        const { password, ...userWithoutPassword } = updatedUser;
+        return userWithoutPassword;
     }
 
     async delete(id: string): Promise<void> {
         await this.userRepository.delete(id);
     }
 
-    getByPseudo(pseudo: string): Promise<User | null> {
-        return this.userRepository.findOneBy({pseudo});
+    async getByPseudo(pseudo: string): Promise<UserWithoutPassword | null> {
+        const user = await this.userRepository.findOneBy({ pseudo });
+        if (user) {
+            const { password, ...userWithoutPassword } = user;
+            return userWithoutPassword;
+        }
+        return null;
     }
 
-    getByEmail(email: string): Promise<User | null> {
-        return this.userRepository.findOneBy({email});
+    async getByEmail(email: string): Promise<UserWithoutPassword | null> {
+        const user = await this.userRepository.findOneBy({ email });
+        if (user) {
+            const { password, ...userWithoutPassword } = user;
+            return userWithoutPassword;
+        }
+        return null;
     }
 }
