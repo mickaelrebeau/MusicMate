@@ -44,11 +44,11 @@ function Layout() {
 
   return auth.access_token ? (
     <>
-      <div className="h-screen">
+      <div className="h-full overflow-hidden">
         <Header />
-        <div className="flex h-full">
+        <div className="flex h-[calc(100vh-80px)]">
           <Sidebar />
-          <div className="overflow-y-scroll w-full">
+          <div className="h-full overflow-y-scroll w-full">
             <Outlet />
           </div>
         </div>
