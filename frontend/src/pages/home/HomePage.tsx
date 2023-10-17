@@ -1,7 +1,7 @@
 import { SongsCard } from '@/src/components/cards/SongsCard';
 import { DailyMixCard } from '@/src/components/cards/dailyMixCard';
+import { SearchSong, SpotifyGetToken } from '@/src/services/fetch';
 import { authorizationProfil } from '@/src/services/user';
-import { CLIENT_ID, CLIENT_SECRET } from '@/src/utils/spotify';
 import { ListPlus, Shuffle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -18,15 +18,18 @@ export function Home() {
       artists: { name: string }[];
       external_urls: { spotify: string };
     }[]
-    >([]);
-  
+  >([]);
+
   const [randomSongIndex, setRandomSongIndex] = useState(0);
+  const currentSong = songs[randomSongIndex];
 
   const [user, setUser] = useState<{ genres: string[] }>({
     genres: [],
   });
 
   useEffect(() => {
+    SpotifyGetToken();
+
     authorizationProfil().then((response) => {
       setUser({
         genres: response.genres,
@@ -34,42 +37,16 @@ export function Home() {
     });
   }, []);
 
-  useEffect(() => {
-    const authParams = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: `grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`,
-    };
-    fetch('https://accounts.spotify.com/api/token', authParams)
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.setItem('token', data.access_token);
-      });
-  }, []);
-
-  async function searchSong() {
+  async function handleClick() {
     if (!token) {
       console.error('Token not available. Please wait for authentication.');
       return;
     }
 
-    const searchParams = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
     const randomGenre =
       user.genres[Math.floor(Math.random() * user.genres.length)].toLowerCase();
 
-    await fetch(
-      `https://api.spotify.com/v1/search?q=genre%3A${randomGenre}&type=track&limit=50`,
-      searchParams
-    )
+    SearchSong(token, randomGenre)
       .then((response) => response.json())
       .then((data) => {
         setSongs(data.tracks.items);
@@ -81,7 +58,7 @@ export function Home() {
   }
 
   return (
-    <section className="px-10 pt-10 pb-20 mx-auto flex flex-col gap-6">
+    <section className="px-10 py-10 mx-auto flex flex-col gap-6">
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl font-bold">Listen Now</h2>
         <p className="text-slate-500">
@@ -89,19 +66,19 @@ export function Home() {
           to listen to a random song.
         </p>
         <button
-          onClick={searchSong}
+          onClick={handleClick}
           className="w-[200px] flex items-center justify-center gap-2 p-2 font-semibold cursor-pointer hover:bg-purple-900 rounded">
           <Shuffle size={20} />
           Shuffle Playback
         </button>
         <div className="flex flex-col gap-2">
-          {randomSongIndex !== null && songs.length > 0 && (
+          {songs.length > 0 && (
             <SongsCard
-              key={songs[randomSongIndex].id}
-              url={songs[randomSongIndex].album.images[0].url}
-              songName={songs[randomSongIndex].name}
-              artists={songs[randomSongIndex].artists}
-              href={songs[randomSongIndex].external_urls.spotify}
+              key={currentSong.id}
+              url={currentSong.album.images[0].url}
+              songName={currentSong.name}
+              artists={currentSong.artists}
+              href={currentSong.external_urls.spotify}
             />
           )}
         </div>
