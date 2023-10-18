@@ -12,62 +12,31 @@ export class UserService {
         private userRepository: Repository<User>,
     ) { }
 
-    async getAll(): Promise<UserWithoutPassword[]> {
-        const users = await this.userRepository.find();
-        const usersWithoutPasswords = users.map(user => {
-            const { password, ...userWithoutPassword } = user;
-            return userWithoutPassword;
-        });
-        return usersWithoutPasswords;
+    async getAll(): Promise<User[]> {
+        return await this.userRepository.find();
     }
 
-    async getById(id: string): Promise<UserWithoutPassword | null> {
-        const user = await this.userRepository.findOneBy({id});
-        if (user) {
-            const { password, ...userWithoutPassword } = user;
-            return userWithoutPassword;
-        }
-        return null;
+    async getById(id: string): Promise<User | null> {
+        return await this.userRepository.findOneBy({id});
     }
 
-    async create(user: SignUpDto): Promise<UserWithoutPassword> {
-        const newUser = this.userRepository.create(user);
-        const savedUser = await this.userRepository.save(newUser);
-        const { password, ...userWithoutPassword } = savedUser;
-        return userWithoutPassword;
+    async create(user: SignUpDto): Promise<User> {
+        return this.userRepository.create(user);
     }
 
-    async update(id: string, user: SignUpDto): Promise<UserWithoutPassword | null> {
-        const existingUser = await this.userRepository.findOneBy({id});
-        if (!existingUser) {
-            return null;
-        }
-        
-        this.userRepository.merge(existingUser, user);
-        const updatedUser = await this.userRepository.save(existingUser);
-        const { password, ...userWithoutPassword } = updatedUser;
-        return userWithoutPassword;
+    async update(id: string, user: SignUpDto): Promise<User| null> {
+        return await this.userRepository.findOneBy({id});
     }
 
     async delete(id: string): Promise<void> {
         await this.userRepository.delete(id);
     }
 
-    async getByPseudo(pseudo: string): Promise<UserWithoutPassword | null> {
-        const user = await this.userRepository.findOneBy({ pseudo });
-        if (user) {
-            const { password, ...userWithoutPassword } = user;
-            return userWithoutPassword;
-        }
-        return null;
+    async getByPseudo(pseudo: string): Promise<User | null> {
+        return await this.userRepository.findOneBy({ pseudo })
     }
 
-    async getByEmail(email: string): Promise<UserWithoutPassword | null> {
-        const user = await this.userRepository.findOneBy({ email });
-        if (user) {
-            const { password, ...userWithoutPassword } = user;
-            return userWithoutPassword;
-        }
-        return null;
+    async getByEmail(email: string): Promise<User | null> {
+        return await this.userRepository.findOneBy({ email });
     }
 }
