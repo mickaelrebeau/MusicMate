@@ -11,12 +11,12 @@ export async function authorizationProfil() {
 }
 
 export async function updateProfil(values: {
-  firstname?: string;
-  lastname?: string;
   pseudo?: string;
-}) {
+  email?: string;
+  genres?: string[];
+}, id: string) {
   try {
-    const response = await api.post('/profil', values);
+    const response = await api.put(`/user/${id}`, values);
     return response;
   } catch (error) {
     console.log(error);
