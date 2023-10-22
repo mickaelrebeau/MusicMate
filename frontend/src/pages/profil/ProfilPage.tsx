@@ -24,10 +24,10 @@ export function Profil() {
     <section className="px-10 py-10 mx-auto flex flex-col items-center justify-center gap-10">
       <div className="flex flex-col gap-4">
         <h2 className="text-2xl text-center font-bold">Profil</h2>
-        <p className="py-2 px-10 border border-slate-600 rounded shadow shadow-purple-500/30">
+        <p className="py-2 px-10 text-center border border-slate-600 rounded shadow shadow-purple-500/30">
           {user.pseudo}
         </p>
-        <p className="py-2 px-10 border border-slate-600 rounded shadow shadow-purple-500/30">
+        <p className="py-2 px-10 text-center border border-slate-600 rounded shadow shadow-purple-500/30">
           {user.email}
         </p>
       </div>
