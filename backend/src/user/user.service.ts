@@ -3,7 +3,8 @@ import { UserWithoutPassword } from './model/user';
 import { SignUpDto } from 'src/auth/dtos/signUp.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
+import { UserUpdateDto } from './dtos/userUpdtae.dto';
 
 @Injectable()
 export class UserService {
@@ -24,8 +25,8 @@ export class UserService {
         return this.userRepository.create(user);
     }
 
-    async update(id: string, user: SignUpDto): Promise<User| null> {
-        return await this.userRepository.findOneBy({id});
+    async update(id: string, user: UserUpdateDto): Promise<UpdateResult> {
+        return await this.userRepository.update(id, user);
     }
 
     async delete(id: string): Promise<void> {
