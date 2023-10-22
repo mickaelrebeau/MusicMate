@@ -2,6 +2,8 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { User } from './model/user.entity';
+import { UserUpdateDto } from './dtos/userUpdtae.dto';
+import { UpdateResult } from 'typeorm';
 
 @Controller('user')
 @ApiTags('User')
@@ -38,7 +40,7 @@ export class UserController {
     @ApiResponse({
         description: 'Update user',
     })
-    update(@Param('id') id: string, @Body() user: User): Promise<any> {
+    update(@Param('id') id: string, @Body() user: UserUpdateDto): Promise<UpdateResult> {
         return this.userService.update(id, user);
     }
 
