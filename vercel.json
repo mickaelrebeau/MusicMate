@@ -1,5 +1,6 @@
 {
 	"version": 2,
+	"scope": "mike_dreeman",
 	"github": {
 		"enabled": false
 	},
