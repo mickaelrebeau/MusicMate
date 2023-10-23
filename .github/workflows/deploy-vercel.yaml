@@ -12,19 +12,19 @@ jobs:
     steps:
       # Checkout and install
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: NPM Cache
         uses: actions/cache@v1
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.pnpm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install deps
-        run: npm ci
+        run: pnpm ci
       # Build and deploy
       - name: Build
-        run: npm run build
+        run: pnpm run build
       - name: Deploy staging
         uses: amondnet/vercel-action@v19
         id: vercel-action-staging
