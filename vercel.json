@@ -1,6 +1,5 @@
 {
 	"version": 2,
-	"scope": "my_own_vercel_scope",
 	"github": {
 		"enabled": false
 	},
