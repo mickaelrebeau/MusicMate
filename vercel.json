@@ -1,16 +1,33 @@
 {
-	"version": 2,
-	"builds": [
-		{
-			"src": "/apps/backend/src/main.ts",
-			"use": "@vercel/node"
+	"name": "MusicMate",
+	"rootDirectory": ".",
+	"workspaces": ["packages/client", "packages/server", "packages/database"],
+	"build": {
+		"command": "npm run build",
+		"functions": {
+			"include": ["/.netlify/functions/server"]
 		},
-		{
-			"src": "/apps/frontend/dist/*",
-			"use": "@vercel/static"
+		"ignore": [
+			"node_modules",
+			".git",
+			".gitignore",
+			".env",
+			".eslintignore",
+			".eslintrc.js",
+			".prettierignore",
+			".prettierrc",
+			"README.md",
+			"nest-cli.json"
+		],
+		"publish": {
+			"dir": "dist/apps/server"
 		}
-	],
-	"routes": [
-		{ "src": "/(.*)", "dest": "/apps/api/src/main.ts", "methods": ["GET"] }
-	]
+	},
+	"environment": {
+		"POSTGRES_HOST": "localhost",
+		"POSTGRES_PORT": "5432",
+		"POSTGRES_DATABASE": "musicmate",
+		"POSTGRES_USERNAME": "postgres",
+		"POSTGRES_PASSWORD": "password"
+	}
 }
