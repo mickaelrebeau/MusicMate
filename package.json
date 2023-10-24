@@ -4,6 +4,7 @@
         "typescript": "^5.2.2"
     },
     "scripts": {
-        "dev": "turbo run dev"
+        "dev": "turbo run dev",
+        "build": "turbo run build"
     }
 }
