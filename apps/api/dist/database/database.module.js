@@ -28,6 +28,9 @@ exports.DatabaseModule = DatabaseModule = __decorate([
                     database: configService.get('POSTGRES_DB'),
                     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
                     autoLoadEntities: true,
+                    ssl: {
+                        rejectUnauthorized: false
+                    }
                 })
             })
         ],
