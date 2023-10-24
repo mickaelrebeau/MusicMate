@@ -21,7 +21,13 @@
 			]
 		},
 		"start": {
-			"dependsOn": ["^build"]
+			"dependsOn": ["^build"],
+			"dotEnv": [
+				".env.development.local",
+				".env.development",
+				".env.local",
+				".env"
+			]
 		},
 		"test": {
 			"dotEnv": [".env.test.local", ".env.test", ".env.local", ".env"]
