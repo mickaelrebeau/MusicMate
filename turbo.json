@@ -1,16 +1,31 @@
 {
-    "$schema": "https://turborepo.org/schema.json",
-    "pipeline": {
-        "dev": {
-            "cache": false
-        },
-        "build": {
-            "dependsOn": [
-                "^build"
-            ],
-            "outputs": [
-                "dist/**"
-            ]
-        }
-    }
+	"$schema": "https://turborepo.org/schema.json",
+	"pipeline": {
+		"dev": {
+			"cache": false,
+			"dotEnv": [
+				".env.development.local",
+				".env.development",
+				".env.local",
+				".env"
+			]
+		},
+		"build": {
+			"dependsOn": ["^build"],
+			"outputs": ["dist/**"],
+			"dotEnv": [
+				".env.development.local",
+				".env.development",
+				".env.local",
+				".env"
+			]
+		},
+		"start": {
+			"dependsOn": ["^build"]
+		},
+		"test": {
+			"dotEnv": [".env.test.local", ".env.test", ".env.local", ".env"]
+		}
+	},
+	"globalDotEnv": [".env"]
 }
