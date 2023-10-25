@@ -14,6 +14,7 @@ let CorsInterceptor = class CorsInterceptor {
         response.header('Access-Control-Allow-Origin', 'https://musicmate.vercel.app');
         response.header('Access-Control-Allow-Headers', 'Content-Type');
         response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+        response.header('Access-Control-Allow-Credentials', 'true');
         return handler.handle();
     }
 };
