@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import * as cors from 'cors';
-import * as dotenv  from 'dotenv';
+import * as dotenv from 'dotenv';
 
 dotenv.config();
 async function bootstrap() {
@@ -27,6 +27,6 @@ async function bootstrap() {
   SwaggerModule.setup('/api/doc', app, document);
 
   app.setGlobalPrefix('api');
-  await app.listen(3030);
+  await app.listen(process.env.PORT);
 }
 bootstrap();
