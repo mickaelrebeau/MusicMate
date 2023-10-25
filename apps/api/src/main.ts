@@ -12,7 +12,7 @@ async function bootstrap() {
   app.use(
     cors({
       // origin: 'http://localhost:8080',
-      origin: '*',
+      origin: ["https://musicmate.vercel.app/", "http://localhost:8080"],
       credentials: true,
     }),
   );
