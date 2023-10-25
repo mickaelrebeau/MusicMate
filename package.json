@@ -6,8 +6,6 @@
 	"scripts": {
 		"dev": "turbo run dev",
 		"build": "turbo run build",
-		"start": "node apps/api/dist/main",
-		"heroku-postbuild": "if [ $CLIENT_ENV ]; then yarn run prod; elif [ $SERVER_ENV ]; then yarn run prod; else echo no environment detected, please set CLIENT_ENV or SERVER_ENV; fi",
-		"prod": "yarn run build"
+		"start": "node apps/api/dist/main"
 	}
 }
