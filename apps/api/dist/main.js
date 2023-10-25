@@ -9,7 +9,7 @@ dotenv.config();
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.use(cors({
-        origin: 'http://localhost:8080',
+        origin: '*',
         credentials: true,
     }));
     const config = new swagger_1.DocumentBuilder()
