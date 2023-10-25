@@ -5,11 +5,13 @@ const app_module_1 = require("./app.module");
 const swagger_1 = require("@nestjs/swagger");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const CorsInterceptor_1 = require("./intercerptors/CorsInterceptor");
 dotenv.config();
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.use(cors({
-        origin: ["https://musicmate.vercel.app/", "http://localhost:8080"],
+        origin: "https://musicmate.vercel.app/",
+        methods: 'GET,PUT,POST,DELETE',
         credentials: true,
     }));
     const config = new swagger_1.DocumentBuilder()
@@ -21,6 +23,7 @@ async function bootstrap() {
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('/api/doc', app, document);
     app.setGlobalPrefix('api');
+    app.useGlobalInterceptors(new CorsInterceptor_1.CorsInterceptor());
     await app.listen(parseInt(process.env.PORT) || 3030);
 }
 bootstrap();
