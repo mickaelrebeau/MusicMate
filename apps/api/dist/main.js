@@ -9,7 +9,7 @@ dotenv.config();
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.use(cors({
-        origin: '*',
+        origin: ["https://musicmate.vercel.app/", "http://localhost:8080"],
         credentials: true,
     }));
     const config = new swagger_1.DocumentBuilder()
@@ -21,7 +21,7 @@ async function bootstrap() {
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('/api/doc', app, document);
     app.setGlobalPrefix('api');
-    await app.listen(3030);
+    await app.listen(parseInt(process.env.PORT) || 3030);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map
