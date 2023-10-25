@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import * as cors from 'cors';
+// import * as cors from 'cors';
 import * as dotenv from 'dotenv';
 import { CorsInterceptor } from './intercerptors/CorsInterceptor';
 
@@ -10,14 +10,21 @@ dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  app.use(
-    cors({
-      // origin: 'http://localhost:8080',
-      origin: "https://musicmate.vercel.app/",
-      methods: 'GET,PUT,POST,DELETE',
-      credentials: true,
-    }),
-  );
+  // app.use(
+  //   cors({
+  //     // origin: 'http://localhost:8080',
+  //     origin: "https://musicmate.vercel.app/",
+  //     methods: 'GET,PUT,POST,DELETE',
+  //     credentials: true,
+  //   }),
+  // );
+
+  app.enableCors({
+    origin: 'https://musicmate.vercel.app',
+    methods: 'GET,PUT,POST,DELETE',
+    allowedHeaders: 'Content-Type',
+    credentials: true,
+  });
 
   const config = new DocumentBuilder()
     .setTitle('Global example')
