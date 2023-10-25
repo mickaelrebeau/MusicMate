@@ -3,17 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
 const swagger_1 = require("@nestjs/swagger");
-const cors = require("cors");
 const dotenv = require("dotenv");
 const CorsInterceptor_1 = require("./intercerptors/CorsInterceptor");
 dotenv.config();
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
-    app.use(cors({
-        origin: "https://musicmate.vercel.app/",
+    app.enableCors({
+        origin: 'https://musicmate.vercel.app',
         methods: 'GET,PUT,POST,DELETE',
+        allowedHeaders: 'Content-Type',
         credentials: true,
-    }));
+    });
     const config = new swagger_1.DocumentBuilder()
         .setTitle('Global example')
         .setDescription('The global API description')
