@@ -9,6 +9,7 @@ import { CorsInterceptor } from './intercerptors/CorsInterceptor';
 dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.useGlobalInterceptors(new CorsInterceptor());
 
   // app.use(
   //   cors({
@@ -18,13 +19,6 @@ async function bootstrap() {
   //     credentials: true,
   //   }),
   // );
-
-  app.enableCors({
-    origin: 'https://musicmate.vercel.app',
-    methods: 'GET,PUT,POST,DELETE',
-    allowedHeaders: 'Content-Type',
-    credentials: true,
-  });
 
   const config = new DocumentBuilder()
     .setTitle('Global example')
@@ -36,7 +30,6 @@ async function bootstrap() {
   SwaggerModule.setup('/api/doc', app, document);
 
   app.setGlobalPrefix('api');
-  app.useGlobalInterceptors(new CorsInterceptor());
   
   await app.listen(parseInt(process.env.PORT) || 3030);
 }
