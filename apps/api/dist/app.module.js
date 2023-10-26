@@ -15,6 +15,8 @@ const database_module_1 = require("./database/database.module");
 const Joi = require("@hapi/joi");
 const config_1 = require("@nestjs/config");
 const auth_module_1 = require("./auth/auth.module");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -29,6 +31,9 @@ exports.AppModule = AppModule = __decorate([
                     POSTGRES_PASSWORD: Joi.string(),
                     POSTGRES_DB: Joi.string().required(),
                 })
+            }),
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '../..', 'client', 'dist'),
             }),
             user_module_1.UserModule,
             database_module_1.DatabaseModule,
