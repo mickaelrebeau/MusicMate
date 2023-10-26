@@ -15,7 +15,6 @@ const database_module_1 = require("./database/database.module");
 const Joi = require("@hapi/joi");
 const config_1 = require("@nestjs/config");
 const auth_module_1 = require("./auth/auth.module");
-const CorsInterceptor_1 = require("./intercerptors/CorsInterceptor");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -36,7 +35,7 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService, CorsInterceptor_1.CorsInterceptor],
+        providers: [app_service_1.AppService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

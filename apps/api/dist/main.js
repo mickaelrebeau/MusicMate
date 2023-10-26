@@ -3,12 +3,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@nestjs/core");
 const app_module_1 = require("./app.module");
 const swagger_1 = require("@nestjs/swagger");
+const cors = require("cors");
 const dotenv = require("dotenv");
-const CorsInterceptor_1 = require("./intercerptors/CorsInterceptor");
 dotenv.config();
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
-    app.useGlobalInterceptors(new CorsInterceptor_1.CorsInterceptor());
+    app.use(cors({
+        origin: "*",
+        methods: 'GET,PUT,POST,DELETE',
+        credentials: true,
+    }));
     const config = new swagger_1.DocumentBuilder()
         .setTitle('Global example')
         .setDescription('The global API description')
