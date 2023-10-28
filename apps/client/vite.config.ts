@@ -9,15 +9,4 @@ export default defineConfig({
       '@': path.resolve(__dirname, '.'),
     },
   },
-  server: {
-    proxy: {
-      '/': {
-        // target: 'http://localhost:3030',
-        target: 'https://musicmate.up.railway.app/',
-        changeOrigin: true,
-      },
-    },
-    host: '0.0.0.0',
-    port: 80,
-  },
 });
