@@ -6,8 +6,6 @@ import { DatabaseModule } from "./database/database.module"
 import * as Joi from '@hapi/joi';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
 
 @Module({
   imports: [
@@ -19,9 +17,6 @@ import { join } from 'path';
         POSTGRES_PASSWORD: Joi.string(),
         POSTGRES_DB: Joi.string().required(),
       })
-    }),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../..', 'client', 'dist'),
     }),
     UserModule,
     DatabaseModule,
