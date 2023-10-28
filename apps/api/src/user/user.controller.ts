@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Header, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { User } from './model/user.entity';
@@ -13,7 +13,6 @@ export class UserController {
     ) {}
     
     @Get()
-    @Header('Access-Control-Allow-Origin','*')
     @ApiResponse({
         description: 'Get all users',
     })
@@ -22,7 +21,6 @@ export class UserController {
     }
 
     @Get(':id')
-    @Header('Access-Control-Allow-Origin','*')
     @ApiResponse({
         description: 'Get user by id',
     })
@@ -31,7 +29,6 @@ export class UserController {
     }
 
     @Post()
-    @Header('Access-Control-Allow-Origin','*')
     @ApiResponse({
         description: 'Create user',
     })
@@ -40,7 +37,6 @@ export class UserController {
     }
 
     @Put(':id')
-    @Header('Access-Control-Allow-Origin','*')
     @ApiResponse({
         description: 'Update user',
     })
@@ -49,7 +45,6 @@ export class UserController {
     }
 
     @Delete(':id')
-    @Header('Access-Control-Allow-Origin','*')
     @ApiResponse({
         description: 'Delete user',
     })
