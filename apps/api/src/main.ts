@@ -8,15 +8,7 @@ dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   
-  app.enableCors(
-    {
-      origin: 'https://musicmate.vercel.app',
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-      credentials: true,
-      allowedHeaders: 'Content-Type, Authorization',
-      optionsSuccessStatus: 204
-    }
-  );
+  app.enableCors();
 
   const config = new DocumentBuilder()
     .setTitle('Global example')
