@@ -7,13 +7,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
-    app.enableCors({
-        origin: 'https://musicmate.vercel.app',
-        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-        credentials: true,
-        preflightContinue: false,
-        optionsSuccessStatus: 204
-    });
+    app.enableCors();
     const config = new swagger_1.DocumentBuilder()
         .setTitle('Global example')
         .setDescription('The global API description')
