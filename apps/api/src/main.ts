@@ -6,7 +6,17 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule, {cors: true});
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  
+  app.enableCors(
+    {
+      origin: 'https://musicmate.vercel.app',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      credentials: true,
+      preflightContinue: false,
+      optionsSuccessStatus: 204
+    }
+  );
 
   const config = new DocumentBuilder()
     .setTitle('Global example')
