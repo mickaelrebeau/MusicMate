@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Header, Post, UseInterceptors } from '@nestjs/common';
 import { RpcSuccessInterceptor } from 'src/intercerptors/RpcSuccessInterceptor';
 import { AuthService } from './auth.service';
 import { SignUpDto } from './dtos/signUp.dto';
@@ -14,6 +14,7 @@ export class AuthController {
     ) { }
     
     @Post('/signup')
+    @Header('Access-Control-Allow-Origin','*')
     @ApiResponse({
         description: 'SignUp user',
     })
@@ -22,6 +23,7 @@ export class AuthController {
     }
 
     @Post('/signin')
+    @Header('Access-Control-Allow-Origin','*')
     @ApiResponse({
         description: 'Login user',
     })
