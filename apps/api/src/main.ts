@@ -25,9 +25,7 @@ async function bootstrap() {
     .addTag('Globals')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/api/doc', app, document);
-
-  app.setGlobalPrefix('api');
+  SwaggerModule.setup('/api', app, document);
   
   await app.listen(parseInt(process.env.PORT) || 3030);
 }
