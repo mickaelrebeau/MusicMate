@@ -10,10 +10,10 @@ async function bootstrap() {
   
   app.enableCors(
     {
-      origin: '*',
+      origin: 'https://musicmate.vercel.app',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       credentials: true,
-      preflightContinue: false,
+      allowedHeaders: 'Content-Type, Authorization',
       optionsSuccessStatus: 204
     }
   );
