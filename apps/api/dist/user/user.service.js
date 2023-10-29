@@ -28,7 +28,7 @@ let UserService = class UserService {
         return await this.userRepository.findOneBy({ id });
     }
     async create(user) {
-        return this.userRepository.create(user);
+        return await this.userRepository.save(user);
     }
     async update(id, user) {
         return await this.userRepository.update(id, user);

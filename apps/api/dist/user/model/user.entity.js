@@ -26,7 +26,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "pseudo", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: 'miketest', description: 'User password' }),
+    (0, swagger_1.ApiProperty)({ example: '@MikeTest123', description: 'User password' }),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
@@ -36,7 +36,7 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: ['Pop', 'Metal', 'Folk'], description: 'User genres' }),
+    (0, swagger_1.ApiProperty)({ example: ['Pop', 'Rock'], description: 'User genres' }),
     (0, typeorm_1.Column)("text", { array: true }),
     __metadata("design:type", Array)
 ], User.prototype, "genres", void 0);
