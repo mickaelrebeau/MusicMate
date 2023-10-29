@@ -11,7 +11,7 @@ export class User {
   @Column()
   pseudo: string;
 
-  @ApiProperty({ example: 'miketest', description: 'User password' })
+  @ApiProperty({ example: '@MikeTest123', description: 'User password' })
   @Column()
   password: string;
 
@@ -19,7 +19,7 @@ export class User {
   @Column()
   email: string;
 
-  @ApiProperty({ example: ['Pop', 'Metal', 'Folk'], description: 'User genres' })
+  @ApiProperty({ example: ['Pop', 'Rock'], description: 'User genres' })
   @Column("text", { array: true })
   genres: string[];
 }

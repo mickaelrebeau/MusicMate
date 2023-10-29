@@ -1,5 +1,4 @@
 import { User } from './model/user.entity';
-import { UserWithoutPassword } from './model/user';
 import { SignUpDto } from 'src/auth/dtos/signUp.dto';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -22,7 +21,7 @@ export class UserService {
     }
 
     async create(user: SignUpDto): Promise<User> {
-        return this.userRepository.create(user);
+        return await this.userRepository.save(user);
     }
 
     async update(id: string, user: UserUpdateDto): Promise<UpdateResult> {
